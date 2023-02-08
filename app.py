@@ -31,14 +31,15 @@ def malaria_prediction(input_list):
     print(prediction)
 
     if (prediction[0]==1): #and (selected_county == malaria_endemic_counties)
-        text = "HIGH ALERT!!! <br/> Malaria Outbreak is anticipated in " + selected_county + " County.<br/> CONTROL MEASURES: <br/>Use vector control; Indoor Residual Spraying (IRS), Insecticide-treated bed nets (ITNs), case management, vaccine administration and public sensitization. <br/> MALARIA ENDEMIC COUNTIES:<br/>"+ malaria_endemic_counties
+        text = "HIGH ALERT!!! <br/> Malaria Outbreak is anticipated in " + selected_county + " County.<br/><br/> CONTROL MEASURES: <br/>Use vector control; Indoor Residual Spraying (IRS), Insecticide-treated bed nets (ITNs), case management, vaccine administration and public sensitization. <br/><br/> MALARIA ENDEMIC COUNTIES:<br/>"+ malaria_endemic_counties
         colour = "red"
-    elif (prediction[0]==0 and (case > 0 or mosqp > 0)):  
-        text = 'MILD ALERT!!! <br/>Mild Malaria Outbreak is anticipated in ' + selected_county + ' County. <br/>Health officials in the county should be on alert and engage in public education and sensitization:<br/>CONTROL MEASURES: <br/>Use antimalaria prophylaxis, Indoor Residual Spraying (IRS), Insecticide-treated bed nets (ITNs). <br/> MALARIA ENDEMIC COUNTIES:<br/>' + malaria_endemic_counties
-        colour = "orange"
-    else:
-        text = 'NO THREAT... <br/> Malaria outbreak is currently NOT anticipated in ' + selected_county + ' County. <br/> MALARIA ENDEMIC COUNTIES:<br/>' + malaria_endemic_counties
+    elif (prediction[0]==0 and (case == 0 and mosqp == 0)):  
+        text = 'NO THREAT... <br/> Malaria outbreak is currently NOT anticipated in ' + selected_county + ' County. <br/><br/> MALARIA ENDEMIC COUNTIES:<br/>' + malaria_endemic_counties
         colour = "green"
+    else:
+        text = 'MILD ALERT!!! <br/>Mild Malaria Outbreak is anticipated in ' + selected_county + ' County. <br/>Health officials in the county should be on alert and engage in public education and sensitization:<br/><br/>CONTROL MEASURES: <br/>Use antimalaria prophylaxis, Indoor Residual Spraying (IRS), Insecticide-treated bed nets (ITNs). <br/><br/> MALARIA ENDEMIC COUNTIES:<br/>' + malaria_endemic_counties
+        colour = "orange"
+        
     st.markdown(f"<div style='background-color: {colour}; padding: 10px;'>{text}</div>", unsafe_allow_html=True)
 
     return prediction
