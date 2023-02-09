@@ -185,7 +185,7 @@ The app is a two-page application with the main page for the prediction purpose 
 	          <div class="footer-copyright">
 	          <div class="container">
 	          Right click on the link to <a class="white-text text-lighten-3" href="https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/">View Malaria Outbreak App on Streamlit. </a><br/>
-	          <a class="white-text text-lighten-3" href="https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/"></a>
+            
 	      </div>
 	    </div>
 	  </footer>
