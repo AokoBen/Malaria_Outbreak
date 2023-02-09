@@ -11,25 +11,25 @@ In 2020, malaria caused an estimated 241 million clinical episodes, and 627,000 
 
 Malaria surveillance is therefore, a core component of an effective system to support elimination of malaria. Surveillance will not only enable countries to monitor progress towards elimination of malaria and develop targeted interventions for at-risk groups, but also boost efforts towards early detection of malaria outbreak and trigger a prompt response to malaria epidemics to minimise the impact of the illness including deaths and the socio-economic burden of malaria epidemics for at-risk groups and regions of the population.
 
-This app is primed to assist public health workers in their effort to detect possibility of an early outbreak of malaria and line up appropriate intervention measures to mitigate the risks associated with an outbreak of the disease.
+About Malaria Outbreak Prediction Model
+This app is primed to assist public health workers to detect possibility of an early outbreak of malaria and suggest measures to mitigate the risks associated with an outbreak of the disease.
 
-Architecture framework
+App Architecture Framework
+The malaria outbreak prediction app is web based and acts as an early warning system for occurrence of malaria. Malaria outbreak is determined through calculating threshold for likely outbreak of malaria based on three frameworks of climate, mosquito vector population and reported malaria cases.
 
-The malaria prediction app is a web based up designed to act as an early warning system for malaria outbreak occurrence. Malaria outbreak is determined through calculating the threshold limit for which past that an outbreak is likely to occur. Climate change is known to have an influence on growth of parasites by either offering perfect conditions for parasites to increase in number or reduce in number. The malaria web app works based on three frameworks from which its architecture is built from:
+i. Vector Based Framework
+Malaria outbreak is attributed to plasmodium falciparum and plasmodium vivax parasites. This framework is based on mosquito vector population. In a herd of mosquito, the number of the two species of mosquito will determines the likelihood of malaria outbreak.
 
-i.	Vector Based Framework
-Malaria is caused by plasmodium falciparum and plasmodium vivax which are the common threats attributed to malaria. This framework works based on mosquito population. In a herd of mosquitos, the number of the two species of mosquito will determine if there is a likelihood of a malaria outbreak.
+ii. Climate Based Framework
+This framework emphasises how climate variability influence the growth of mosquitoes hence increase or decrease their population. Climate change is known to have an influence on growth of mosquito vector and parasites by offering perfect conditions for parasites to grow in number. Climate variables used for this web app are: rainfall, max and min temperature, relative humidity (at 0800 and 14000hrs).
 
-ii.	Climate Based Framework
-In this framework, the main emphasis is on how climate variability influence the growth of mosquitoes hence increasing or decreasing their population. Climate variables used for this web app are, rainfall, max and min temperature, relative humidity (at 0800 and 14000hrs).
-
-iii.	Case Based Framework
-For this framework, our focus is in the cases reported. The cases reported is a direct indicator of the threat species in the area.
+iii. Case Based Framework
+The focus in this framework is reported malaria cases. Reported malaria cases is a direct indicator of malaria threat species in the area.
 
 App Usage
+The app is built using machine learning pipeline and trained using decision tree algorithm. Prediction is done by analyzing aspects of the dataset which include malaria population, climate and malaria cases variables. Prediction can therefore be made even with some parameter values being zero. Weather API is used to gather live climatic conditions of counties in Kenya and users asked to provide herd mosquito vector population and number of reported malaria cases.
 
-The app is built using machine learning where the dataset is collected, cleaned and undergo feature engineering and is trained using different machine learning algorithms. One important thing to be noted is, the algorithm uses the above discussed framework to predict the likelihood of an outbreak. The algorithm used for this is decision tree, the prediction is done from analyzing the vector aspect of the dataset, the climate variables and cases. This means that the prediction can be made even with some parameter values as zero. A weather api is used to gather live climatic conditions of counties of Kenya and the user is asked to give herd population and number of cases reported then the algorithm can do the prediction. The prediction is classified into three outcomes, ‘HIGH ALERT’, ‘MILD ALERT’ and NO THREAT for which control measure approaches are provide to the users.
-The app is a two-page application with the main page for the prediction purpose while the second page is the visualization page where graphs that show the different relationship of variables is used. The graphs are built using plotly which makes them interactive with zoom in and zoom out features available as well as the employing different themes. 
+The algorithm then uses the framework to predict likelihood of a malaria outbreak. Prediction is classified into three outcomes: ‘HIGH ALERT’, ‘MILD ALERT’ and NO THREAT, and suggests control measures to address a possible malaria outbreak. The app is a two-page application with the main page for the prediction purpose while the second page is the visualization of tables and graphs showing relationship between different variables.
 
 Streamlit Dashboard Malaria Outbreak app url
 
