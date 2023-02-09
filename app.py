@@ -144,7 +144,7 @@ if st.checkbox("show shape "):
      st.write('{:,} rows; {:,} columns'.format(df.shape[0], df.shape[1]))
 
 
-# adding html  Template
+# html  Template
 
 footer_temp = """
 	 <!-- CSS  -->
@@ -176,18 +176,19 @@ The focus in this framework is reported malaria cases. Reported malaria cases is
 
 The app is built using machine learning pipeline and trained using decision tree algorithm. Prediction is done by analyzing aspects of the dataset which include malaria population, climate and malaria cases variables. Prediction can therefore be made even with some parameter values being zero. Weather API is used to gather live climatic conditions of counties in Kenya and users asked to provide herd mosquito vector population and number of reported malaria cases.</br></br> The algorithm then uses the framework to predict likelihood of a malaria outbreak. Prediction is classified into three outcomes: ‘HIGH ALERT’, ‘MILD ALERT’ and NO THREAT, and suggests control measures to address a possible malaria outbreak.
 
-The app is a two-page application with the main page for the prediction purpose while the second page is the visualization of tables and graphs showing relationship between different variables. </p>
+The app is a two-page application with the main page for the prediction purpose while the second page is the visualization of tables and graphs showing relationship between different variables.</br></br>
+
+<strong>Streamlit Dashboard Malaria Outbreak app url</strong></br>
+
+https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/
+
+ </p>
 	              </div>
 
 	              
 	            </div>
 	          </div>
-	          <div class="footer-copyright">
-	          <div class="container">
-	          Right click on the link to <a class="white-text text-lighten-3" href="https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/">View Malaria Outbreak App on Streamlit. </a><br/>
-            
-	      </div>
-	    </div>
+	          
 	  </footer>
 
 	"""

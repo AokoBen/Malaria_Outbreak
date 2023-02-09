@@ -31,3 +31,6 @@ App Usage
 The app is built using machine learning where the dataset is collected, cleaned and undergo feature engineering and is trained using different machine learning algorithms. One important thing to be noted is, the algorithm uses the above discussed framework to predict the likelihood of an outbreak. The algorithm used for this is decision tree, the prediction is done from analyzing the vector aspect of the dataset, the climate variables and cases. This means that the prediction can be made even with some parameter values as zero. A weather api is used to gather live climatic conditions of counties of Kenya and the user is asked to give herd population and number of cases reported then the algorithm can do the prediction. The prediction is classified into three outcomes, ‘HIGH ALERT’, ‘MILD ALERT’ and NO THREAT for which control measure approaches are provide to the users.
 The app is a two-page application with the main page for the prediction purpose while the second page is the visualization page where graphs that show the different relationship of variables is used. The graphs are built using plotly which makes them interactive with zoom in and zoom out features available as well as the employing different themes. 
 
+Streamlit Dashboard Malaria Outbreak app url
+
+https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/
