@@ -9,7 +9,7 @@ import plotly.figure_factory as ff
 import requests
 import json
 import pickle
-
+import streamlit.components.v1 as components
 
 
 
@@ -120,6 +120,82 @@ elif response.status_code == 11001:
 
 else:
         st.write("HTTP request Error: Weather data for selected County not available")
+
+
+
+
+st.sidebar.header("Analytics")
+
+
+menu = ['Display Data ','About']
+selection = st.sidebar.selectbox("Select menu: ", menu)
+
+if selection== 'Display Data ':
+
+# display data for selected county
+    st.markdown(f'Display prediction data for {selected_county} County.')
+    st.write(df.head())
+
+
+# shape of data
+if st.checkbox("show shape "):
+    
+     st.write('Data Shape')
+     st.write('{:,} rows; {:,} columns'.format(df.shape[0], df.shape[1]))
+
+
+# adding html  Template
+
+footer_temp = """
+	 <!-- CSS  -->
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	  <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	 <footer class="page-footer grey darken-4">
+	    <div class="container" id="aboutapp">
+	        <div class="row">
+	            <div class="col l6 s12">
+	                <h5 class="white-text">Malaria Outbreak Prediction Model</h5>
+	          <p class="grey-text text-lighten-4">This app is primed to assist public health workers to detect possibility of an early outbreak of malaria and suggest measures to mitigate the risks associated with an outbreak of the disease.</br></br>
+
+<strong>App Architecture Framework</strong></br>
+
+The malaria outbreak prediction app is web based and acts as an early warning system for occurrence of malaria. Malaria outbreak is determined through calculating threshold for likely outbreak of malaria based on three frameworks of climate, mosquito vector population and reported malaria cases.</br></br>
+
+<strong>i.	Vector Based Framework</strong></br>
+Malaria outbreak is attributed to plasmodium falciparum and plasmodium vivax parasites. This framework is based on mosquito vector population. In a herd of mosquito, the number of the two species of mosquito will determines the likelihood of malaria outbreak.</br></br>
+
+<strong>ii.	Climate Based Framework</strong></br>
+This framework emphasises how climate variability influence the growth of mosquitoes hence increase or decrease their population. Climate change is known to have an influence on growth of mosquito vector and parasites by offering perfect conditions for parasites to grow in number. Climate variables used for this web app are: rainfall, max and min temperature, relative humidity (at 0800 and 14000hrs).</br></br>
+
+<strong>iii.	Case Based Framework</strong></br>
+The focus in this framework is reported malaria cases. Reported malaria cases is a direct indicator of malaria threat species in the area.</br></br>
+
+<strong>App Usage</strong></br>
+
+The app is built using machine learning pipeline and trained using decision tree algorithm. Prediction is done by analyzing aspects of the dataset which include malaria population, climate and malaria cases variables. Prediction can therefore be made even with some parameter values being zero. Weather API is used to gather live climatic conditions of counties in Kenya and users asked to provide herd mosquito vector population and number of reported malaria cases.</br></br> The algorithm then uses the framework to predict likelihood of a malaria outbreak. Prediction is classified into three outcomes: ‘HIGH ALERT’, ‘MILD ALERT’ and NO THREAT, and suggests control measures to address a possible malaria outbreak.
+
+The app is a two-page application with the main page for the prediction purpose while the second page is the visualization of tables and graphs showing relationship between different variables. </p>
+	              </div>
+
+	              
+	            </div>
+	          </div>
+	          <div class="footer-copyright">
+	          <div class="container">
+	          Right click on the link to <a class="white-text text-lighten-3" href="https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/">View Malaria Outbreak App on Streamlit. </a><br/>
+	          <a class="white-text text-lighten-3" href="https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/"></a>
+	      </div>
+	    </div>
+	  </footer>
+
+	"""
+
+if selection== 'About':
+    st.subheader("About App")
+    components.html(footer_temp, height=1500)
+
 
 
 #endemicity = ""
