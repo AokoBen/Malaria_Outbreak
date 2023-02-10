@@ -10,14 +10,20 @@ import requests
 import json
 import pickle
 import streamlit.components.v1 as components
-
-
+import os 
+import seaborn as sns
+import secretapi
 
 #set main page title  
 st.title("Malaria Outbreak Prediction Model")
 
 #load saved model
 loaded_model = pickle.load(open('malaria_model.sav', 'rb'))
+
+#malaria_outbreak = sns.load_dataset('malaria_outbreak')
+
+#read dataset used for training and testing the model
+malaria_outbreak_df = pd.read_csv('malaria_outbreak.csv')
 
 #define malaria prediciton function
 def malaria_prediction(input_list):
@@ -31,7 +37,7 @@ def malaria_prediction(input_list):
     print(prediction)
 
     if (prediction[0]==1): #and (selected_county == malaria_endemic_counties)
-        text = "HIGH ALERT!!! <br/> Malaria Outbreak is anticipated in " + selected_county + " County.<br/><br/> CONTROL MEASURES: <br/>Use vector control; Indoor Residual Spraying (IRS), Insecticide-treated bed nets (ITNs), case management, vaccine administration and public sensitization. <br/><br/> MALARIA ENDEMIC COUNTIES:<br/>"+ malaria_endemic_counties
+        text = "HIGH ALERT!!! <br/> Malaria Outbreak is anticipated in " + selected_county + " County.<br/><br/> CONTROL MEASURES: <br/>Use malaria prohylaxis when travelling to malaria endemic counties, take vector control measures; Indoor Residual Spraying (IRS), Insecticide-treated bed nets (ITNs), case management, environmental management, vaccine administration, and public sensitization. <br/><br/> MALARIA ENDEMIC COUNTIES:<br/>"+ malaria_endemic_counties
         colour = "red"
     elif (prediction[0]==0 and (case == 0 and mosqp == 0)):  
         text = 'NO THREAT... <br/> Malaria outbreak is currently NOT anticipated in ' + selected_county + ' County. <br/><br/> MALARIA ENDEMIC COUNTIES:<br/>' + malaria_endemic_counties
@@ -45,7 +51,8 @@ def malaria_prediction(input_list):
     return prediction
 
 #set weather API for live weather data  
-API_KEY = '10908cb3ca2b510064ad0549d8d857dc'
+#API_KEY = os.environ.get('OPEN_WEATHER_API_KEY')
+
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather?'
 
 #create counties
@@ -62,7 +69,7 @@ selected_county = st.sidebar.selectbox('Select or type County name or number',co
 #url = BASE_URL+ 'appid=' + API_KEY + '&q='+ selected_county
 
 #set url for live weather data requests for selected county
-url = BASE_URL+ 'appid=' + API_KEY + '&q='+ selected_county
+url = BASE_URL+ 'appid=' + secretapi.API_KEY + '&q='+ selected_county
 response = requests.get(url)
 
 #process live weather data for the selected county & check for possible weather API request errors
@@ -133,18 +140,28 @@ selection = st.sidebar.selectbox("Select menu: ", menu)
 if selection== 'Display Data ':
 
 # display data for selected county
-    st.markdown(f'Display prediction data for {selected_county} County.')
+    st.markdown(f'Prediction data for {selected_county} County.')
     st.write(df.head())
+    st.write(f'{selected_county} County Data Shape')
+    st.write('{:,} rows; {:,} columns'.format(df.shape[0], df.shape[1]))
+
+# dispaly train test data
+if st.checkbox("Show more data "):
+     st.subheader("Train-Test Dataset: Data Shape ") 
+ 
+     st.write('{:,} rows; {:,} columns'.format(malaria_outbreak_df.shape[0], malaria_outbreak_df.shape[1])) # show Data Shape
+
+# describe and show data shape
+     st.subheader("Train-Test Dataset: Descriptive statistics")
+     st.write(malaria_outbreak_df.describe())
+
+     st.subheader("Train-Test Dataset: Five rows")
+     st.write(malaria_outbreak_df.head())
+ #    st.write(malaria_outbreak.head())
+     #sns.boxplot(x=tips["total_bill"])
 
 
-# shape of data
-if st.checkbox("show shape "):
-    
-     st.write('Data Shape')
-     st.write('{:,} rows; {:,} columns'.format(df.shape[0], df.shape[1]))
-
-
-# html  Template
+# insert html Template
 
 footer_temp = """
 	 <!-- CSS  -->
@@ -161,26 +178,24 @@ footer_temp = """
 
 <strong>App Architecture Framework</strong></br>
 
-The malaria outbreak prediction app is web based and acts as an early warning system for occurrence of malaria. Malaria outbreak is determined through calculating threshold for likely outbreak of malaria based on three frameworks of climate, mosquito vector population and reported malaria cases.</br></br>
+The malaria outbreak prediction app is web based and acts as an early warning system for occurrence of malaria. Malaria outbreak is determined by calculating threshold for likely outbreak of malaria based on three frameworks namely; climatic variables, mosquito vector population and reported malaria cases.</br></br>
 
 <strong>i.	Vector Based Framework</strong></br>
-Malaria outbreak is attributed to plasmodium falciparum and plasmodium vivax parasites. This framework is based on mosquito vector population. In a herd of mosquito, the number of the two species of mosquito will determines the likelihood of malaria outbreak.</br></br>
+Malaria outbreak is attributed to plasmodium falciparum and plasmodium vivax parasites. This framework is based on meeting threshold for mosquito vector population as hosts for these disease causing parasites. In a herd of mosquito, the number of the two species of mosquito will determines the likelihood of malaria outbreak.</br></br>
 
 <strong>ii.	Climate Based Framework</strong></br>
-This framework emphasises how climate variability influence the growth of mosquitoes hence increase or decrease their population. Climate change is known to have an influence on growth of mosquito vector and parasites by offering perfect conditions for parasites to grow in number. Climate variables used for this web app are: rainfall, max and min temperature, relative humidity (at 0800 and 14000hrs).</br></br>
+This framework emphasises how climate variability influence the growth of mosquitoes hence, their population. Climate change is known to have an influence on growth of mosquito vector and parasites by offering perfect conditions for both to grow in number. Climate variables used in this app are: rainfall, max and min temperature, relative humidity (at 0800 and 14000hrs).</br></br>
 
 <strong>iii.	Case Based Framework</strong></br>
-The focus in this framework is reported malaria cases. Reported malaria cases is a direct indicator of malaria threat species in the area.</br></br>
+The focus in this framework is reported malaria cases in an area. Reported malaria cases is a direct indicator of malaria outbreak threat in a target area as a pointer to the presence of the disease within community.</br></br>
 
 <strong>App Usage</strong></br>
 
-The app is built using machine learning pipeline and trained using decision tree algorithm. Prediction is done by analyzing aspects of the dataset which include malaria population, climate and malaria cases variables. Prediction can therefore be made even with some parameter values being zero. Weather API is used to gather live climatic conditions of counties in Kenya and users asked to provide herd mosquito vector population and number of reported malaria cases.</br></br> The algorithm then uses the framework to predict likelihood of a malaria outbreak. Prediction is classified into three outcomes: ‘HIGH ALERT’, ‘MILD ALERT’ and NO THREAT, and suggests control measures to address a possible malaria outbreak.
+The model is trained using decision tree algorithm and built using machine learning pipeline. Prediction is done by analyzing aspects of the dataset which include malaria population, malaria cases and climate variables. Prediction can be made even with some parameter values being zero. Weather API is used to gather live climatic conditions of counties in Kenya, and users asked to provide herd mosquito vector population and number of reported malaria cases.</br></br> The algorithm then uses the framework to predict likelihood of a malaria outbreak. Prediction is classified into three outcomes: <strong>HIGH ALERT</strong>, <strong>MILD ALERT</strong> and <strong>NO THREAT</strong>, and suggests control measures to address a possible malaria outbreak.
 
-The app is a two-page application with the main page for the prediction purpose while the second page is the visualization of tables and graphs showing relationship between different variables.</br></br>
+The app is a two-stage application with the main page for the prediction and shows various tables, while the second stage is for visualization of graphs showing relationship between different variables.</br></br>
 
-<strong>Streamlit Dashboard Malaria Outbreak app url</strong></br>
 
-https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/
 
  </p>
 	              </div>
