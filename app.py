@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 import dash
@@ -12,15 +11,13 @@ import pickle
 import streamlit.components.v1 as components
 import os 
 import seaborn as sns
-import secretapi
+import secrets
 
 #set main page title  
 st.title("Malaria Outbreak Prediction Model")
 
 #load saved model
 loaded_model = pickle.load(open('malaria_model.sav', 'rb'))
-
-#malaria_outbreak = sns.load_dataset('malaria_outbreak')
 
 #read dataset used for training and testing the model
 malaria_outbreak_df = pd.read_csv('malaria_outbreak.csv')
@@ -69,7 +66,7 @@ selected_county = st.sidebar.selectbox('Select or type County name or number',co
 #url = BASE_URL+ 'appid=' + API_KEY + '&q='+ selected_county
 
 #set url for live weather data requests for selected county
-url = BASE_URL+ 'appid=' + secretapi.API_KEY + '&q='+ selected_county
+url = BASE_URL+ 'appid=' + st.secrets.API_KEY + '&q='+ selected_county
 response = requests.get(url)
 
 #process live weather data for the selected county & check for possible weather API request errors
@@ -174,26 +171,47 @@ footer_temp = """
 	        <div class="row">
 	            <div class="col l6 s12">
 	                <h5 class="white-text">Malaria Outbreak Prediction Model</h5>
-	          <p class="grey-text text-lighten-4">This app is primed to assist public health workers to detect possibility of an early outbreak of malaria and suggest measures to mitigate the risks associated with an outbreak of the disease.</br></br>
+	          <p class="grey-text text-lighten-4">This app is primed to assist public health workers 
+                  to detect possibility of an early outbreak of malaria and suggest measures to mitigate 
+                  the risks associated with an outbreak of the disease.</br></br>
 
 <strong>App Architecture Framework</strong></br>
 
-The malaria outbreak prediction app is web based and acts as an early warning system for occurrence of malaria. Malaria outbreak is determined by calculating threshold for likely outbreak of malaria based on three frameworks namely; climatic variables, mosquito vector population and reported malaria cases.</br></br>
+The malaria outbreak prediction app is web based and acts as an early warning system for occurrence of 
+malaria. Malaria outbreak is determined by calculating threshold for likely outbreak of malaria based on 
+three frameworks namely; climatic variables, mosquito vector population and reported malaria cases.</br></br>
 
 <strong>i.	Vector Based Framework</strong></br>
-Malaria outbreak is attributed to plasmodium falciparum and plasmodium vivax parasites. This framework is based on meeting threshold for mosquito vector population as hosts for these disease causing parasites. In a herd of mosquito, the number of the two species of mosquito will determines the likelihood of malaria outbreak.</br></br>
+Malaria outbreak is attributed to plasmodium falciparum and plasmodium vivax parasites. This framework is 
+based on meeting threshold for mosquito vector population as hosts for these disease causing parasites. 
+In a herd of mosquito, the number of the two species of mosquito as host for the plasmodium parasites 
+determines the likelihood of a malaria outbreak.</br></br>
 
 <strong>ii.	Climate Based Framework</strong></br>
-This framework emphasises how climate variability influence the growth of mosquitoes hence, their population. Climate change is known to have an influence on growth of mosquito vector and parasites by offering perfect conditions for both to grow in number. Climate variables used in this app are: rainfall, max and min temperature, relative humidity (at 0800 and 14000hrs).</br></br>
+This framework emphasises how climate variability influence the growth of mosquitoes hence, their population. 
+Favourable climatic condition is known to have an influence on growth of mosquito vector and parasites by 
+offering perfect conditions for both to grow in number. Climate variables used in this app are: rainfall, 
+maximum and minimum temperature, relative humidity (at 0800 and 14000hrs).</br></br>
 
 <strong>iii.	Case Based Framework</strong></br>
-The focus in this framework is reported malaria cases in an area. Reported malaria cases is a direct indicator of malaria outbreak threat in a target area as a pointer to the presence of the disease within community.</br></br>
+The focus in this framework is the reported malaria cases in an area. Reported malaria cases is a direct 
+indicator of malaria outbreak threat in a target area as a pointer to the presence of the disease within 
+community.</br></br>
 
 <strong>App Usage</strong></br>
 
-The model is trained using decision tree algorithm and built using machine learning pipeline. Prediction is done by analyzing aspects of the dataset which include malaria population, malaria cases and climate variables. Prediction can be made even with some parameter values being zero. Weather API is used to gather live climatic conditions of counties in Kenya, and users asked to provide herd mosquito vector population and number of reported malaria cases.</br></br> The algorithm then uses the framework to predict likelihood of a malaria outbreak. Prediction is classified into three outcomes: <strong>HIGH ALERT</strong>, <strong>MILD ALERT</strong> and <strong>NO THREAT</strong>, and suggests control measures to address a possible malaria outbreak.
+The model is built using machine learning pipeline and trained by decision tree algorithm. Prediction is 
+done by analyzing aspects of the dataset which include malaria population, malaria cases and climate 
+variables. The weather API is used to gather data for live climatic conditions of counties in Kenya, and 
+users asked to provide herd mosquito vector population and number of reported malaria cases.</br></br> 
+The algorithm then uses the supplied data to make prediction of the likelihood of a malaria outbreak. 
+Prediction can be made even with some parameter values being zero and classified into three outcomes: 
+<strong>HIGH ALERT</strong>, <strong>MILD ALERT</strong> and <strong>NO THREAT</strong>, and provides 
+suggestions for control measures to address a possible malaria outbreak.
 
-The app is a two-stage application with the main page for the prediction and shows various tables, while the second stage is for visualization of graphs showing relationship between different variables.</br></br>
+The app is a two-stage application with the main page providing predictions and analysis of tables for 
+prediction and train-test variables. The second stage provides visualization of graphs showing relationship 
+between the different variables used to train and test the model.</br></br>
 
 
 

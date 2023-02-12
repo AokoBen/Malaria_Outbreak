@@ -9,7 +9,7 @@ import plotly.figure_factory as ff
 import plotly.graph_objects as go
    
 st.title('Malaria Outbreak Prediction Model')
-st.header('Visualization Page') 
+st.header('Visualize relationships in Train-Test dataset') 
 
 #read dataset used for training and testing the model
 malaria_outbreak_df = pd.read_csv('malaria_outbreak.csv')
