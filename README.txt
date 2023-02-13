@@ -34,4 +34,4 @@ The algorithm then uses the supplied data to make prediction of the likelihood o
 
 Streamlit Dashboard Malaria Outbreak app url
 
-https://aokoben-malaria-outbreak-app-7dwpxn.streamlit.app/
+https://aokoben-malaria-outbreak-app-7q8jpy.streamlit.app/
