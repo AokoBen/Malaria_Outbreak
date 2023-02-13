@@ -10,7 +10,7 @@ import json
 import pickle
 import streamlit.components.v1 as components
 #import os 
-import seaborn as sns
+#import seaborn as sns
 
 #set main page title  
 st.title("Malaria Outbreak Prediction Model")
