@@ -182,15 +182,15 @@ three frameworks namely; climatic variables, mosquito vector population and repo
 
 <strong>i.	Vector Based Framework</strong></br>
 Malaria outbreak is attributed to plasmodium falciparum and plasmodium vivax parasites. This framework is 
-based on meeting threshold for mosquito vector population as hosts for these disease causing parasites. 
-In a herd of mosquito, the number of the two species of mosquito as host for the plasmodium parasites 
+based on meeting threshold for Mosquito Vector Population (MVP) as hosts for the disease causing parasites. 
+In a herd, the number of mosquito as host for the two species of plasmodium parasites 
 determines the likelihood of a malaria outbreak.</br></br>
 
 <strong>ii.	Climate Based Framework</strong></br>
-This framework emphasises how climate variability influence the growth of mosquitoes hence, their population. 
-Favourable climatic condition is known to have an influence on growth of mosquito vector and parasites by 
-offering perfect conditions for both to grow in number. Climate variables used in this app are: rainfall, 
-maximum and minimum temperature, relative humidity (at 0800 and 14000hrs).</br></br>
+This framework emphasises on the influence of climate variability on the growth of mosquitoes hence, their population 
+and that of the plasmodium parasites. Favourable climatic condition is known to have a positive impact on growth of mosquito 
+vector and parasites by offering the right environment for both to grow in number. Climatic variables used in this app are: 
+rainfall, maximum and minimum temperature, relative humidity (at 0800 and 14000hrs).</br></br>
 
 <strong>iii.	Case Based Framework</strong></br>
 The focus in this framework is the reported malaria cases in an area. Reported malaria cases is a direct 
