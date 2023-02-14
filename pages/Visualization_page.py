@@ -49,7 +49,7 @@ with fig_col2:
 #comparativve analysis of the effect of temperature on malarial cases
 
 with fig_col1:
-        st.subheader(f"Comparative analysis of effect of temperature on")
+        st.subheader(f"Comparative analysis of effect of")
         fig = px.scatter(df, x="MaxTemperature", y="MalarialCases", color="MVP", trendline='ols', trendline_color_override = 'red', title = 'Malaria Outbreak Prediction')
         tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
         with tab1:
@@ -58,7 +58,7 @@ with fig_col1:
                 st.plotly_chart(fig, theme=None, use_conatiner_width=True)
 
 with fig_col2:
-        st.subheader(f"malarial cases")
+        st.subheader(f"temperature on malarial cases")
         fig = px.scatter(df, x="MinTemperature", y="MalarialCases", color="MVP", trendline='ols', trendline_color_override = 'red', title = 'Malaria Outbreak Prediction')
         tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
         with tab1:
@@ -71,7 +71,7 @@ with fig_col2:
 
 
 with fig_col1:
-        st.subheader(f"Comparative analysis of effect of humidity on")
+        st.subheader(f"Comparative analysis of effect of")
         fig = px.scatter(df, x="RelativeHumidity_1(0800hrs)", y="MalarialCases", color="Rainfall", trendline='ols', trendline_color_override = 'red', title = 'Malaria Outbreak Prediction')
         tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
         with tab1:
@@ -80,7 +80,7 @@ with fig_col1:
                 st.plotly_chart(fig, theme=None, use_conatiner_width=True)
 
 with fig_col2:
-        st.subheader(f"malarial cases")
+        st.subheader(f"humidity on malarial cases")
         fig = px.scatter(df, x="RelativeHumidity_2(1400hrs)", y="MalarialCases", color="Rainfall", trendline='ols', trendline_color_override = 'red', title = 'Malaria Outbreak Prediction')
         tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
         with tab1:
@@ -92,7 +92,7 @@ with fig_col2:
 
 #comparativve analysis of effect of rainfall and vector population on malarial cases
 with fig_col1:
-        st.subheader(f"Comparative analysis of effect of rainfall and")
+        st.subheader(f"Analysis of effect of rainfall and vector")
         fig = px.scatter(df, x="Rainfall", y="MalarialCases", color="MaxTemperature", trendline='ols', trendline_color_override = 'red', title = 'Malaria Outbreak Prediction')
         tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
         with tab1:
@@ -101,7 +101,7 @@ with fig_col1:
                 st.plotly_chart(fig, theme=None, use_conatiner_width=True)
 
 with fig_col2:
-        st.subheader(f"vector population on malarial cases")
+        st.subheader(f"population on malarial cases")
         fig = px.scatter(df, x="MVP", y="MalarialCases", color="MaxTemperature", trendline='ols', trendline_color_override = 'red', title = 'Malaria Outbreak Prediction')
         tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
         with tab1:
