@@ -47,7 +47,6 @@ with fig_col2:
 
 
 #comparativve analysis of the effect of temperature on malarial cases
-
 with fig_col1:
         st.subheader(f"Comparative analysis of effect of")
         fig = px.scatter(df, x="MaxTemperature", y="MalarialCases", color="MVP", trendline='ols', trendline_color_override = 'red', title = 'Malaria Outbreak Prediction')
@@ -68,8 +67,6 @@ with fig_col2:
         
 
 #comparativve analysis of the effect of humidity on malarial cases
-
-
 with fig_col1:
         st.subheader(f"Comparative analysis of effect of")
         fig = px.scatter(df, x="RelativeHumidity_1(0800hrs)", y="MalarialCases", color="Rainfall", trendline='ols', trendline_color_override = 'red', title = 'Malaria Outbreak Prediction')
@@ -88,7 +85,6 @@ with fig_col2:
         with tab2:
                 st.plotly_chart(fig, theme=None, use_conatiner_width=True)
         
-
 
 #comparativve analysis of effect of rainfall and vector population on malarial cases
 with fig_col1:
@@ -110,19 +106,22 @@ with fig_col2:
                 st.plotly_chart(fig, theme=None, use_conatiner_width=True)
 
 
-#visualize box plots
+#visualize mean, quartile ranges, min, max values of variables through box plots
 trace0 = go.Box(
     y=df.MalarialCases,
+    boxpoints='all',
     name = 'Malaria Cases',
     marker = dict(
-        color = 'rgb(12, 12, 140)',
+        color = 'rgb(12, 122, 140)',
     )
 )
-
 
 data = [trace0]
 with fig_col1:
         fig = go.Figure(data=data)
+        fig.update_layout(
+        title="Malaria Cases"  
+        )
         with tab1:
                  st.plotly_chart(fig, theme="streamlit", use_conatiner_width=True)
         #with tab2:
@@ -130,6 +129,7 @@ with fig_col1:
 
 trace1 = go.Box(
     y=df.Rainfall,
+    boxpoints='all',
     name = 'Rainfall',
     marker = dict(
         color = 'rgb(12, 12, 140)',
@@ -139,14 +139,18 @@ trace1 = go.Box(
 #-------------------------------------
 trace2 = go.Box(
     y=df.MalarialCases,
+    boxpoints='all',
     name = 'Malarial Cases',
     marker = dict(
-        color = 'rgb(12, 122, 140)',
+        color = 'rgb(80, 122, 190)',
     )
 )
 data = [trace1, trace2]
 with fig_col2:
         fig = go.Figure(data=data)
+        fig.update_layout(
+        title="Rainfall Vs Malaria Cases"  
+        )
         with tab1:
                 st.plotly_chart(fig, theme="streamlit", use_conatiner_width=True)
         #with tab2:
@@ -155,51 +159,59 @@ with fig_col2:
 
 trace3 = go.Box(
     y=df['MVP'],
+    boxpoints='all',
     name = 'Mosquito Population',
     marker = dict(
-        color = 'rgb(12, 128, 128)',
+        color = 'rgb(200, 28, 128)',
     )
 )
 
 trace4 = go.Box(
     y=df.MalarialCases,
+    boxpoints='all',
     name = 'Malarial Cases',
     marker = dict(
-        color = 'rgb(12, 100, 200)',
+        color = 'rgb(50, 100, 200)',
     )
 )
 
 data = [trace3, trace4]
 with fig_col1:
         fig = go.Figure(data=data)
+        fig.update_layout(
+        title="Mosquito population Vs Malaria Cases"  
+        )
         with tab1:
                 st.plotly_chart(fig, theme="streamlit", use_conatiner_width=True)
         #with tab2:
                 #st.plotly_chart(fig, theme=None, use_conatiner_width=True)
 
 
-
-
-
 trace5 = go.Box(
     y=df['MaxTemperature'],
+    boxpoints='all',
     name = 'Maximun Temperature',
     marker = dict(
-        color = 'rgb(12, 100, 100)',
+        color = 'rgb(150, 100, 100)',
     )
 )
 
 trace6 = go.Box(
     y=df['MinTemperature'],
+    boxpoints='all',
     name = 'Minimum Temperature',
     marker = dict(
-        color = 'rgb(12, 100, 250)',
+        color = 'rgb(15, 100, 250)',
     )
 )
 data = [trace5, trace6]
 with fig_col2:
         fig = go.Figure(data=data)
+        fig.update_layout(
+        title="Temperature ranges"  
+        )
         with tab1:
                 st.plotly_chart(fig, theme="streamlit", use_conatiner_width=True)
         #with tab2:
                 #st.plotly_chart(fig, theme=None, use_conatiner_width=True)
+
