@@ -106,8 +106,8 @@ if response.status_code == 200:
 
         diagnosis = ""
        
-        if st.button("Predict"):
-        # Pass the input values to your model and get the output
+        if st.button(f"Predict Malaria Outbreak for {selected_county} County"):
+        # Pass the input values to the model and get output
            diagnosis = malaria_prediction(input_list)
            st.success(diagnosis)
 
