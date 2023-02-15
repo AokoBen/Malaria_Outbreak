@@ -56,12 +56,12 @@ counties = ["Mombasa", "Kwale", "Kilifi", "Tana River", "Lamu", "Taita Taveta", 
             "Isiolo", "Meru", "Tharaka Nithi", "Embu", "Kitui", "Machakos", "Makueni", "Nyandarua", "Nyeri", "Kirinyaga",
             "Murang'a", "Kiambu", "Turkana", "West Pokot", "Samburu", "Trans Nzoia", "Uasin Gishu", "Elgeyo Marakwet",
             "Nandi", "Baringo", "Laikipia", "Nakuru", "Narok", "Kajiado", "Kericho", "Bomet", "Kakamega", "Vihiga",
-            "Bungoma", "Busia", "Siaya", "Kisumu", "Homa Bay", "Migori", "Kisii", "Nyamira","Nairobi"]
+            "Bungoma", "Busia", "Siaya", "Kisumu", "Homa Bay", "Migori", "Kisii", "Nyamira","Nairobi"] 
 
 malaria_endemic_counties = "Kericho, Busia, Homa Bay, Kisumu, Siaya, Migori, Mombasa, Kakamega, Bungoma, Vihiga, Nairobi"
 #create prompt for County data input
 st.sidebar.header('User Input')
-selected_county = st.sidebar.selectbox('Select or type County name or number',counties)
+selected_county = st.sidebar.selectbox('Select or type County name:',counties)
 #url = BASE_URL+ 'appid=' + API_KEY + '&q='+ selected_county
 
 #set url for live weather data requests for selected county
@@ -122,7 +122,7 @@ elif response.status_code == 11001:
         st.write("ConnectionError: Connection Failed...")
 
 else:
-        st.write("HTTP request Error: Weather data for selected County not available")
+        st.write(f"HTTP request Error: Sorry, weather data for {selected_county} County not available")
 
 
 
@@ -133,7 +133,7 @@ st.sidebar.header("Analytics")
 menu = ['Display Data ','About']
 selection = st.sidebar.selectbox("Select menu: ", menu)
 
-if selection== 'Display Data ':
+if selection== 'Display Data ' and response.status_code == 200:
 
 # display data for selected county
     st.markdown(f'Prediction data for {selected_county} County.')
